@@ -1,0 +1,26 @@
+﻿@model Appen.Controllers.Dto
+
+<h1>Min testsida</h1>
+<div>
+	@using (Html.BeginForm("Spara", "Home", FormMethod.Post, null))
+	{
+        <label>Namn</label><br>
+	    <input id="namn" name="namn" type="text" /><br>
+	    <label>Husdjurnamn</label><br>
+	    <input id="djurnamn" name="djurnamn" type="text" /><br>
+	    <input id="knapp" type="submit" value="Spara" />
+	}
+</div>
+
+<h2>Sparade personer</h2>
+<div>
+	<ul>
+	@if (Model != null)
+    {
+        foreach (var item in Model.Lista)
+        {
+            <li>@item.ToString()</li>    
+        }
+	}
+	</ul>
+</div>
