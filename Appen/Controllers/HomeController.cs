@@ -19,7 +19,7 @@ namespace Appen.Controllers
 
         public IActionResult Index()
         {
-			var lista = hamtaIndex.Hamta();
+			var lista = hamtaIndex.HamtaPerson();
 
 			var dto = new Dto() { Lista = lista };
 
@@ -27,11 +27,11 @@ namespace Appen.Controllers
         }
 
         [HttpPost]
-        public ActionResult Spara(string namn, string djurnamn)
+        public ActionResult Spara(string namn, string ortnamn)
         {
-            sparaIndex.Spara(namn, djurnamn);
+            sparaIndex.Spara(namn, ortnamn);
 
-            var lista = hamtaIndex.Hamta();
+            var lista = hamtaIndex.HamtaPerson();
 
             var dto = new Dto() { Lista = lista };
 

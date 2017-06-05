@@ -6,6 +6,6 @@ namespace Appen.Controllers
     public interface IHamtaIndex
     {
         IEnumerable<string> Hamta();
-        IEnumerable<string> HamtaHusdjur();
+        IEnumerable<string> HamtaPerson();
     }
 }

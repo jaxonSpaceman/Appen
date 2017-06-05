@@ -8,7 +8,7 @@ namespace Appen.Controllers
     {
         private string connectionString = "host=localhost;database=postgres;username=postgres";
 
-        public void Spara(string namn, string djurnamn)
+        public void Spara(string namn, string ortnamn)
         {
             var store = DocumentStore.For(_ =>
             {
@@ -18,10 +18,10 @@ namespace Appen.Controllers
 
 			using (var session = store.LightweightSession())
 			{
-                var person = new Person { Namn = namn };
-                var husdjur = new Husdjur { Djurnamn = djurnamn, AgarId = person.Id };
+                var ort = new Ort { Ortnamn = ortnamn };
+                var person = new Person { Namn = namn, OrtId = ort.Id };
 
-                session.Store<object>(person, husdjur);
+                session.Store<object>(ort, person);
 				session.SaveChanges();
 			}
 		}

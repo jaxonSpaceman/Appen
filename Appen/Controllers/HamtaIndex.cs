@@ -21,15 +21,15 @@ namespace Appen.Controllers
 			using (var session = store.OpenSession())
 			{
 				var existing = session
-					.Query<Person>()
+					.Query<Ort>()
 					.ToList()
-                    .Select(p => p.Namn);
+                    .Select(p => p.Ortnamn);
 
                 return existing;
 			}
 		}
 
-        public IEnumerable<string> HamtaHusdjur()
+        public IEnumerable<string> HamtaPerson()
         {
 			var store = DocumentStore.For(_ =>
 			{
@@ -39,12 +39,13 @@ namespace Appen.Controllers
 
 			using (var session = store.OpenSession())
 			{
-				Person included = null;
-				var existing = session
-                    .Query<Husdjur>()
-				    .Include<Person>(x => x.AgarId, x => included = x)
-					.ToList()
-                    .Select(h => h.Djurnamn + " " + included.Namn);
+                var dict = new Dictionary<Guid, Ort>();
+
+                var existing = session
+                    .Query<Person>()
+                    .Include(x => x.OrtId, dict)
+                    .ToList()
+                    .Select(h => h.Namn + " " + dict.FirstOrDefault(p => p.Value.Id == h.OrtId).Value.Ortnamn);
                 
 				return existing;
 			}
